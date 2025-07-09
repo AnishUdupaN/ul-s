@@ -18,11 +18,11 @@ class KeywordQueryEventListener(EventListener):
     def on_event(self, event, extension):
         items=[]
         print('On Event\n\n\n\n')
-        #networks= wifilists.listwifi()
-        #saved=networks[0]
-        #available=networks[1]
+        networks= wifilists.listwifi()
+        saved=networks[0]
+        available=networks[1]
         #saved
-        saved=[1,2,3,4]
+        #saved=[1,2,3,4]
         if len(saved)>0:
             items.append(ExtensionResultItem(
                     icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
@@ -30,7 +30,7 @@ class KeywordQueryEventListener(EventListener):
                     description="Click to Connect",
                     on_enter=ExtensionCustomAction({'SSID': 'Null'}, keep_app_open=False)
                 ))
-        """
+        
         for i in saved:
             items.append(ExtensionResultItem(
                     icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
@@ -53,7 +53,7 @@ class KeywordQueryEventListener(EventListener):
                 ))
         itemsno=len(saved)+len(available)+2
         return RenderResultListAction(items[:itemsno])
-        """
+        
         return RenderResultListAction(items[:1])
 
 
