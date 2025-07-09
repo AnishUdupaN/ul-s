@@ -1,9 +1,6 @@
-"""import subprocess
-import os
-import multi
 from ulauncher.api.client.Extension import Extension
 from ulauncher.api.client.EventListener import EventListener
-from ulauncher.api.shared.event import KeywordQueryEvent, ItemEnterEvent, PreferencesEvent, PreferencesUpdateEvent
+from ulauncher.api.shared.event import KeywordQueryEvent, ItemEnterEvent
 from ulauncher.api.shared.item.ExtensionResultItem import ExtensionResultItem
 from ulauncher.api.shared.action.RenderResultListAction import RenderResultListAction
 from ulauncher.api.shared.action.RunScriptAction import RunScriptAction
@@ -30,9 +27,9 @@ class KeywordQueryEventListener(EventListener):
 if __name__ == '__main__':
     ClipboardHistoryExtension().run()
     
-"""
-    
 
+    
+"""
 from ulauncher.api.client.Extension import Extension
 from ulauncher.api.client.EventListener import EventListener
 from ulauncher.api.shared.event import KeywordQueryEvent, ItemEnterEvent
@@ -68,3 +65,4 @@ class KeywordQueryEventListener(EventListener):
 
 if __name__ == '__main__':
     ClipboardHistoryExtension().run()
+"""
