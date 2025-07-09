@@ -17,10 +17,10 @@ class KeywordQueryEventListener(EventListener):
         lstt = ['apple','ball','cat']
         for i in range(len(lstt)):
             items.append(ExtensionResultItem(
-                icon=os.path.join(os.getcwd(),'images/icon.png'),
+                icon='images/icon.png',
                 name=lstt[i],
                 description="Click to Open",
-                on_enter=RunScriptAction(f'xdg-open "www.{lines[i]}.com"', [])
+                on_enter=RunScriptAction(f'xdg-open "www.{lstt[i]}.com"', [])
             ))
         return RenderResultListAction(items[:5])
 
