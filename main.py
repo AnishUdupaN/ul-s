@@ -26,12 +26,14 @@ class KeywordQueryEventListener(EventListener):
 
 class ItemEnterEventListener(EventListener):
     def on_event(self, event, extension):
+        pass
+        """
         data = event.get_data()
         item = data.get('item')
         with open('~/temppp/a.txt','a') as filee:
             filee.write(f"got {item}\n")
             filee.close()
-    
+        """
 if __name__ == '__main__':
     mainfn().run()
     
