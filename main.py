@@ -60,7 +60,7 @@ class ItemEnterEventListener(EventListener):
         items=[]
         data = event.get_data()
         if len(data)=1:
-            return #do nothing ,should be replaced by do nothing API instead of custom instruction.
+            print('Hello World') #do nothing ,should be replaced by do nothing API instead of custom instruction.
         else:
             if data['SAVED']==True:
                 a=wifilists.SavedConnect(data['SSID'])
