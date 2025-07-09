@@ -76,13 +76,13 @@ class ItemEnterEventListener(EventListener):
                     items.append(ExtensionResultItem(
                         icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
                         name='Connected Successfully!',
-                        on_enter=ExtensionCustomAction({'SSID': i,'SECURITY':saved[i][1],'SAVED':False}, keep_app_open=False) #do nothing action
+                        on_enter=ExtensionCustomAction({'SSID': 'Null'}, keep_app_open=False) #do nothing action
                     ))
                 else:
                     items.append(ExtensionResultItem(
                         icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
-                        name='Connected Successfully!',
-                        on_enter=ExtensionCustomAction({'SSID': i,'SECURITY':saved[i][1],'SAVED':False}, keep_app_open=False) #do nothing action
+                        name='Connection Failure',
+                        on_enter=ExtensionCustomAction({'SSID': 'Null'}, keep_app_open=False) #do nothing action
                     ))
                 return RenderResultListAction(items[:1])
             else:
