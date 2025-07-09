@@ -76,12 +76,11 @@ class ItemEnterEventListener(EventListener):
                     ))
                 return RenderResultListAction(items[:1])
             else:
-                #wifilists.UnsavedConnect(data['SSID'])
+            with open('/home/anishudupan/temppp/a.txt','a') as filee:
+                filee.write(f"{datetime.datetime.today()} : got {item}\n")
+                filee.close()
+                    #wifilists.UnsavedConnect(data['SSID'])
         
-        #item = data.get('item')
-        with open('/home/anishudupan/temppp/a.txt','a') as filee:
-            filee.write(f"{datetime.datetime.today()} : got {item}\n")
-            filee.close()
 
 if __name__ == '__main__':
     mainfn().run()
