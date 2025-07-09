@@ -59,6 +59,9 @@ class ItemEnterEventListener(EventListener):
         else:
             if data['SAVED']==True:
                 a=wifilists.SavedConnect(data['SSID'])
+                with open('/home/anishudupan/temppp/a.txt','a') as filee:
+                    filee.write(f"{datetime.datetime.today()} : Connection with {data['SSID']} with status {a}\n")
+                    filee.close()
                 if a==True:
                     items.append(ExtensionResultItem(
                         icon='images/icon.png',
