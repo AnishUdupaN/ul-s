@@ -62,7 +62,7 @@ class ItemEnterEventListener(EventListener):
         items=[]
         print('EnterEventListener')
         data = event.get_data()
-        if len(data)=1:
+        if len(data)==1:
             print('Hello World') #do nothing ,should be replaced by do nothing API instead of custom instruction.
         else:
             if data['SAVED']==True:
