@@ -1,3 +1,4 @@
+import datetime
 from ulauncher.api.client.Extension import Extension
 from ulauncher.api.client.EventListener import EventListener
 from ulauncher.api.shared.event import KeywordQueryEvent, ItemEnterEvent
@@ -29,7 +30,7 @@ class ItemEnterEventListener(EventListener):
         data = event.get_data()
         item = data.get('item')
         with open('/home/anishudupan/temppp/a.txt','a') as filee:
-            filee.write(f"got {item}\n")
+            filee.write(fdatetime.datetime.today() : "got {item}\n")
             filee.close()
 
 if __name__ == '__main__':
