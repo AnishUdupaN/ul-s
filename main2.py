@@ -36,10 +36,11 @@ class ItemEnterEventListener(EventListener):
     def on_event(self, event, extension):
         data = event.get_data()
         item = data.get('item')
+        """
         with open('/home/anishudupan/temppp/a.txt','a') as filee:
             filee.write(f"{datetime.datetime.today()} : got {item}\n")
             filee.close()
-
+        """
 if __name__ == '__main__':
     mainfn().run()
     
