@@ -9,6 +9,7 @@ from ulauncher.api.shared.action.ExtensionCustomAction import ExtensionCustomAct
 class mainfn(Extension):
     def __init__(self):
         super(mainfn, self).__init__()
+        print('Initialized\n\n\n\n')
         self.subscribe(KeywordQueryEvent, KeywordQueryEventListener())
         self.subscribe(ItemEnterEvent, ItemEnterEventListener())
 
@@ -16,6 +17,7 @@ class mainfn(Extension):
 class KeywordQueryEventListener(EventListener):
     def on_event(self, event, extension):
         items=[]
+        print('On Event\n\n\n\n')
         #networks= wifilists.listwifi()
         #saved=networks[0]
         #available=networks[1]
@@ -58,6 +60,7 @@ class KeywordQueryEventListener(EventListener):
 class ItemEnterEventListener(EventListener):
     def on_event(self, event, extension):
         items=[]
+        print('EnterEventListener')
         data = event.get_data()
         if len(data)=1:
             print('Hello World') #do nothing ,should be replaced by do nothing API instead of custom instruction.
