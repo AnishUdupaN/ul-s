@@ -13,11 +13,12 @@ class ClipboardHistoryExtension(Extension):
 
 class KeywordQueryEventListener(EventListener):
     def on_event(self, event, extension):
-        items = ['apple','ball','cat']
-        for i in range(len(items)):
+        items=[]
+        lstt = ['apple','ball','cat']
+        for i in range(len(lstt)):
             items.append(ExtensionResultItem(
                 icon=os.path.join(os.getcwd(),'images/icon.png'),
-                name=items[i],
+                name=lstt[i],
                 description="Click to Open",
                 on_enter=RunScriptAction(f'xdg-open "www.{lines[i]}.com"', [])
             ))
