@@ -17,12 +17,12 @@ class KeywordQueryEventListener(EventListener):
         items = ['apple','ball','cat']
         for i in range(len(items)):
             items.append(ExtensionResultItem(
-                icon=os.path.join(os.getcwd(),'images/icon.png'),
+                icon='images/icon.png',
                 name=items[i],
                 description="Click to Open",
                 on_enter=RunScriptAction(f'xdg-open "www.{lines[i]}.com"', [])
             ))
-        return RenderResultListAction(items[:5])
+        return RenderResultListAction(items[:3])
 
 if __name__ == '__main__':
     ClipboardHistoryExtension().run()
