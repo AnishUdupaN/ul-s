@@ -71,8 +71,7 @@ def SavedConnect(ssid)->bool:
     """
     res=subprocess.run(["bash","-c",f"nmcli dev wifi connect {ssid}"], capture_output=True, text=True)
     result=res.stdout
-    print(result,end='\n\n')
-    print('len(result) : ',len(result))
+    print('SavedConnect Result :',result,end='\n\n')
     if len(result)==0:
         return False
     else:

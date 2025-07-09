@@ -9,7 +9,7 @@ from ulauncher.api.shared.action.ExtensionCustomAction import ExtensionCustomAct
 class mainfn(Extension):
     def __init__(self):
         super(mainfn, self).__init__()
-        print('Initialized\n\n\n\n')
+        print('Initialized\n\n')
         self.subscribe(KeywordQueryEvent, KeywordQueryEventListener())
         self.subscribe(ItemEnterEvent, ItemEnterEventListener())
 
@@ -17,7 +17,7 @@ class mainfn(Extension):
 class KeywordQueryEventListener(EventListener):
     def on_event(self, event, extension):
         items=[]
-        print('On Event\n\n\n\n')
+        print('On Event\n\n')
         networks= wifilists.listwifi()
         saved=networks[0]
         available=networks[1]
