@@ -20,7 +20,7 @@ class KeywordQueryEventListener(EventListener):
                 icon='images/icon.png',
                 name=lstt[i],
                 description="Click to Open",
-                on_enter=ExtensionCustomAction({'item': item}, keep_app_open=False)
+                on_enter=ExtensionCustomAction({'item': lstt[i]}, keep_app_open=False)
             ))
         return RenderResultListAction(items[:5])
 
