@@ -19,39 +19,63 @@ class KeywordQueryEventListener(EventListener):
         networks= wifilists.listwifi()
         saved=networks[0]
         available=networks[1]
+        #saved
         if len(saved)>0:
             items.append(ExtensionResultItem(
                     icon='images/icon.png',
                     name='Saved and Available',
                     description="Click to Connect",
-                    on_enter=ExtensionCustomAction({'item': 'Null'}, keep_app_open=False)
+                    on_enter=ExtensionCustomAction({'SSID': 'Null'}, keep_app_open=False)
                 ))
         for i in saved:
             items.append(ExtensionResultItem(
                     icon='images/icon.png',
                     name=f'{saved[i][0]},{i},{saved[i][1]}',
-                    on_enter=ExtensionCustomAction({'item': i}, keep_app_open=False)
+                    on_enter=ExtensionCustomAction({'SSID': i,'SECURITY':saved[i][1],'SAVED':True}, keep_app_open=False)
                 ))
+        #not saved
         if len(available)>0:
             items.append(ExtensionResultItem(
                     icon='images/icon.png',
                     name='Available',
-                    description="Click to Connect",
-                    on_enter=ExtensionCustomAction({'item': 'Null'}, keep_app_open=False)
+                    description="Cannot Connect Here",
+                    on_enter=ExtensionCustomAction({'SSID': 'Null'}, keep_app_open=False)
                 ))
         for i in available:
             items.append(ExtensionResultItem(
                     icon='images/icon.png',
                     name=f'{available[i][0]},{i},{available[i][1]}',
-                    on_enter=ExtensionCustomAction({'item': i}, keep_app_open=False)
+                    on_enter=ExtensionCustomAction({'SSID': i,'SECURITY':saved[i][1],'SAVED':False}, keep_app_open=False)
                 ))
         itemsno=len(saved)+len(available)+2
         return RenderResultListAction(items[:itemsno])
 
 class ItemEnterEventListener(EventListener):
     def on_event(self, event, extension):
+        items=[]
         data = event.get_data()
-        item = data.get('item')
+        if len(data)=1:
+            return #do nothing ,should be replaced by do nothing API instead of custom instruction.
+        else:
+            if data['SAVED']==True:
+                a=wifilists.SavedConnect(data['SSID'])
+                if a==True:
+                    items.append(ExtensionResultItem(
+                        icon='images/icon.png',
+                        name='Connected Successfully!',
+                        on_enter=ExtensionCustomAction({'SSID': i,'SECURITY':saved[i][1],'SAVED':False}, keep_app_open=False) #do nothing action
+                    ))
+                else:
+                    items.append(ExtensionResultItem(
+                        icon='images/icon.png',
+                        name='Connected Successfully!',
+                        on_enter=ExtensionCustomAction({'SSID': i,'SECURITY':saved[i][1],'SAVED':False}, keep_app_open=False) #do nothing action
+                    ))
+                return RenderResultListAction(items[:1])
+            else:
+                #wifilists.UnsavedConnect(data['SSID'])
+        
+        #item = data.get('item')
         with open('/home/anishudupan/temppp/a.txt','a') as filee:
             filee.write(f"{datetime.datetime.today()} : got {item}\n")
             filee.close()

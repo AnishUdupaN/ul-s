@@ -65,6 +65,18 @@ def listwifi()->tuple:
     return fulldict
 
 
+def SavedConnect(ssid)->bool:
+    """
+    Connects to the given WiFi network given it is a Saved Network.
+    """
+    res=subprocess.run(["bash","-c",f"nmcli dev wifi connect {ssid}"], capture_output=True, text=True)
+    result=res.stdout
+    if len(result)==0:
+        return True
+    else:
+        return False
+
+
 if __name__=="__main__":
     str1="comm -12 <(nmcli -t -f NAME connection show | sort) <(nmcli -t -f SSID device wifi list | sort)"
     str2="comm -23 <(nmcli -t -f SSID device wifi list | sort | uniq) <(nmcli -t -f NAME connection show | sort | uniq)"
