@@ -53,6 +53,7 @@ class KeywordQueryEventListener(EventListener):
 class ItemEnterEventListener(EventListener):
     def on_event(self, event, extension):
         items=[]
+        """
         data = event.get_data()
         if len(data)=1:
             return #do nothing ,should be replaced by do nothing API instead of custom instruction.
@@ -80,6 +81,7 @@ class ItemEnterEventListener(EventListener):
                     filee.write(f"{datetime.datetime.today()} : In Else part {item}\n")
                     filee.close()
                 #wifilists.UnsavedConnect(data['SSID'])
+        """
         
 
 if __name__ == '__main__':
