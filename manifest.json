@@ -1,6 +1,6 @@
 {
   "required_api_version": "^2.0.0",
-  "name": "Just a smaple extension",
+  "name": "Just a sample extension",
   "description": "An extension to do something.",
   "developer_name": "Anish",
   "icon": "images/icon.png",
