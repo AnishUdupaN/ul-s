@@ -27,6 +27,7 @@ class KeywordQueryEventListener(EventListener):
                     description="Click to Connect",
                     on_enter=ExtensionCustomAction({'SSID': 'Null'}, keep_app_open=False)
                 ))
+        """
         for i in saved:
             items.append(ExtensionResultItem(
                     icon='images/icon.png',
@@ -49,11 +50,13 @@ class KeywordQueryEventListener(EventListener):
                 ))
         itemsno=len(saved)+len(available)+2
         return RenderResultListAction(items[:itemsno])
+        """
+        return RenderResultListAction(items[:1])
+
 
 class ItemEnterEventListener(EventListener):
     def on_event(self, event, extension):
         items=[]
-        """
         data = event.get_data()
         if len(data)=1:
             return #do nothing ,should be replaced by do nothing API instead of custom instruction.
@@ -81,7 +84,7 @@ class ItemEnterEventListener(EventListener):
                     filee.write(f"{datetime.datetime.today()} : In Else part {item}\n")
                     filee.close()
                 #wifilists.UnsavedConnect(data['SSID'])
-        """
+        
         
 
 if __name__ == '__main__':
