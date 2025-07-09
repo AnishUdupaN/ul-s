@@ -46,12 +46,12 @@ class KeywordQueryEventListener(EventListener):
                     on_enter=ExtensionCustomAction({'SSID': 'Null'}, keep_app_open=False)
                 ))
         for i in available:
+            print(f'saved[i][1] : {saved},i : {i}')
             items.append(ExtensionResultItem(
                     icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
                     name=f'{available[i][0]},{i},{available[i][1]}',
-                    print(f'saved[i][1] : {saved},i : {i}')
-                    #on_enter=ExtensionCustomAction({'SSID': i,'SECURITY':saved[i][1],'SAVED':False}, keep_app_open=False)
-                    on_enter=ExtensionCustomAction({'SSID': 'Null'}, keep_app_open=False)
+                    on_enter=ExtensionCustomAction({'SSID': i,'SECURITY':saved[i][1],'SAVED':False}, keep_app_open=False)
+                    #on_enter=ExtensionCustomAction({'SSID': 'Null'}, keep_app_open=False)
                 ))
         itemsno=len(saved)+len(available)+2
         return RenderResultListAction(items[:itemsno])
