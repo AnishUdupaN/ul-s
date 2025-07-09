@@ -16,7 +16,7 @@ class mainfn(Extension):
 class KeywordQueryEventListener(EventListener):
     def on_event(self, event, extension):
         items=[]
-        networks= wifilists.listavailable()
+        networks= wifilists.listwifi()
         saved=networks[0]
         available=networks[1]
         if len(saved)>0:
@@ -45,9 +45,8 @@ class KeywordQueryEventListener(EventListener):
                     name=f'{available[i][0]},{i},{available[i][1]}',
                     on_enter=ExtensionCustomAction({'item': i}, keep_app_open=False)
                 ))
-
-        
-        return RenderResultListAction(items[:5])
+        itemsno=len(saved)+len(available)+2
+        return RenderResultListAction(items[:itemsno])
 
 class ItemEnterEventListener(EventListener):
     def on_event(self, event, extension):
