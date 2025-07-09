@@ -23,13 +23,6 @@ class KeywordQueryEventListener(EventListener):
                 description="Click to Open",
                 on_enter=ExtensionCustomAction({'item': lstt[i]}, keep_app_open=False)
             ))
-    
-        items.append(ExtensionResultItem(
-            icon='images/icon.png',
-            name="Hello",
-            on_enter=ExtensionCustomAction({'item': "Hello"}, keep_app_open=False)
-        ))
-
         return RenderResultListAction(items[:5])
 
 class ItemEnterEventListener(EventListener):
