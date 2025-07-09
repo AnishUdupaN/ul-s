@@ -1,4 +1,5 @@
 import datetime
+import wifilists
 from ulauncher.api.client.Extension import Extension
 from ulauncher.api.client.EventListener import EventListener
 from ulauncher.api.shared.event import KeywordQueryEvent, ItemEnterEvent
@@ -15,21 +16,37 @@ class mainfn(Extension):
 class KeywordQueryEventListener(EventListener):
     def on_event(self, event, extension):
         items=[]
-        lstt = ['apple','ball','cat']
-        for i in range(len(lstt)):
+        networks= wifilists.listavailable()
+        saved=networks[0]
+        available=networks[1]
+        if len(saved)>0:
             items.append(ExtensionResultItem(
-                icon='images/icon.png',
-                name=lstt[i],
-                description="Click to Open",
-                on_enter=ExtensionCustomAction({'item': lstt[i]}, keep_app_open=False)
-            ))
-    
-        items.append(ExtensionResultItem(
-            icon='images/icon.png',
-            name="Hello",
-            on_enter=ExtensionCustomAction({'item': "Hello"}, keep_app_open=False)
-        ))
+                    icon='images/icon.png',
+                    name='Saved and Available',
+                    description="Click to Connect",
+                    on_enter=ExtensionCustomAction({'item': 'Null'}, keep_app_open=False)
+                ))
+        for i in saved:
+            items.append(ExtensionResultItem(
+                    icon='images/icon.png',
+                    name=f'{saved[i][0]},{i},{saved[i][1]}',
+                    on_enter=ExtensionCustomAction({'item': i}, keep_app_open=False)
+                ))
+        if len(available)>0:
+            items.append(ExtensionResultItem(
+                    icon='images/icon.png',
+                    name='Available',
+                    description="Click to Connect",
+                    on_enter=ExtensionCustomAction({'item': 'Null'}, keep_app_open=False)
+                ))
+        for i in available:
+            items.append(ExtensionResultItem(
+                    icon='images/icon.png',
+                    name=f'{available[i][0]},{i},{available[i][1]}',
+                    on_enter=ExtensionCustomAction({'item': i}, keep_app_open=False)
+                ))
 
+        
         return RenderResultListAction(items[:5])
 
 class ItemEnterEventListener(EventListener):

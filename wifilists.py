@@ -11,17 +11,38 @@ def listsaved()->list:
 
 
 def listavailable()->dict:
-    available="nmcli -t -f SSID,SIGNAL device wifi list | sort -t: -k2 -nr | awk -F: '!seen[$1]++'"
+    """
+    Returns a dictionary {SSID:[Strength,Security]}
+    where security:True if Network is secure,False if Network is open
+    """
+    available="nmcli -t -f SSID,SIGNAL,SECURITY device wifi list | sort -t: -k2 -nr | awk -F: '!seen[$1]++'"
     result2 = subprocess.run(["bash","-c",available], capture_output=True, text=True)
     output2 = result2.stdout
     output2=output2.split('\n')
     output2 = [x for x in output2 if x != '']
-    avail={}
+    avail={} #{'A':['Strength':int,'Security':bool]}
     for i in output2:
-        ind=i.index(':')
-        lhs=i[:ind]
-        rhs=i[ind+1:]
-        avail[lhs]=rhs
+        first=i[:i.index(':')]
+        i=i[i.index(':')+1:]
+        second=i[:i.index(':')]
+        i=i[i.index(':')+1:]
+        third=i[:-1]
+        second=int(second)
+        if second>80 and second<=100:
+            second = '5'
+        elif second>60 and second<=80:
+            second = '4'
+        elif second>40 and second<=60:
+            second = '3'
+        elif second>20 and second<=40:
+            second = '2'
+        else:
+            second = '1'
+        if third=='':
+            third=False #network is secured
+        else:
+            third=True #network is open
+        avail[first]=[second,third]
     return avail
 
 
