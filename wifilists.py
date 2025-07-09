@@ -74,9 +74,9 @@ def SavedConnect(ssid)->bool:
     print(result,end='\n\n')
     print('len(result) : ',len(result))
     if len(result)==0:
-        return True
-    else:
         return False
+    else:
+        return True
 
 
 if __name__=="__main__":
