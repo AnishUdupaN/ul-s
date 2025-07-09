@@ -28,7 +28,7 @@ class ItemEnterEventListener(EventListener):
     def on_event(self, event, extension):
         data = event.get_data()
         item = data.get('item')
-        with open('~/temppp/a.txt','a') as filee:
+        with open('/home/anishudupan/temppp/a.txt','a') as filee:
             filee.write(f"got {item}\n")
             filee.close()
 
