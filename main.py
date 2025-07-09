@@ -25,7 +25,7 @@ class KeywordQueryEventListener(EventListener):
         saved=[1,2,3,4]
         if len(saved)>0:
             items.append(ExtensionResultItem(
-                    icon='images/icon.png',
+                    icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
                     name='Saved and Available',
                     description="Click to Connect",
                     on_enter=ExtensionCustomAction({'SSID': 'Null'}, keep_app_open=False)
@@ -33,21 +33,21 @@ class KeywordQueryEventListener(EventListener):
         """
         for i in saved:
             items.append(ExtensionResultItem(
-                    icon='images/icon.png',
+                    icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
                     name=f'{saved[i][0]},{i},{saved[i][1]}',
                     on_enter=ExtensionCustomAction({'SSID': i,'SECURITY':saved[i][1],'SAVED':True}, keep_app_open=True)
                 ))
         #not saved
         if len(available)>0:
             items.append(ExtensionResultItem(
-                    icon='images/icon.png',
+                    icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
                     name='Available',
                     description="Cannot Connect Here",
                     on_enter=ExtensionCustomAction({'SSID': 'Null'}, keep_app_open=False)
                 ))
         for i in available:
             items.append(ExtensionResultItem(
-                    icon='images/icon.png',
+                    icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
                     name=f'{available[i][0]},{i},{available[i][1]}',
                     on_enter=ExtensionCustomAction({'SSID': i,'SECURITY':saved[i][1],'SAVED':False}, keep_app_open=False)
                 ))
@@ -72,13 +72,13 @@ class ItemEnterEventListener(EventListener):
                     filee.close()
                 if a==True:
                     items.append(ExtensionResultItem(
-                        icon='images/icon.png',
+                        icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
                         name='Connected Successfully!',
                         on_enter=ExtensionCustomAction({'SSID': i,'SECURITY':saved[i][1],'SAVED':False}, keep_app_open=False) #do nothing action
                     ))
                 else:
                     items.append(ExtensionResultItem(
-                        icon='images/icon.png',
+                        icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
                         name='Connected Successfully!',
                         on_enter=ExtensionCustomAction({'SSID': i,'SECURITY':saved[i][1],'SAVED':False}, keep_app_open=False) #do nothing action
                     ))
