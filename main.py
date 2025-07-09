@@ -31,7 +31,7 @@ class KeywordQueryEventListener(EventListener):
             items.append(ExtensionResultItem(
                     icon='images/icon.png',
                     name=f'{saved[i][0]},{i},{saved[i][1]}',
-                    on_enter=ExtensionCustomAction({'SSID': i,'SECURITY':saved[i][1],'SAVED':True}, keep_app_open=False)
+                    on_enter=ExtensionCustomAction({'SSID': i,'SECURITY':saved[i][1],'SAVED':True}, keep_app_open=True)
                 ))
         #not saved
         if len(available)>0:
