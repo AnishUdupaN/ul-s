@@ -30,7 +30,7 @@ class ItemEnterEventListener(EventListener):
         data = event.get_data()
         item = data.get('item')
         with open('/home/anishudupan/temppp/a.txt','a') as filee:
-            filee.write(fdatetime.datetime.today() : "got {item}\n")
+            filee.write(f"{datetime.datetime.today()} : got {item}\n")
             filee.close()
 
 if __name__ == '__main__':
