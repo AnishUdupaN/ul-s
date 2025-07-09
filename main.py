@@ -3,8 +3,9 @@ from ulauncher.api.client.EventListener import EventListener
 from ulauncher.api.shared.event import KeywordQueryEvent, ItemEnterEvent
 from ulauncher.api.shared.item.ExtensionResultItem import ExtensionResultItem
 from ulauncher.api.shared.action.RenderResultListAction import RenderResultListAction
-from ulauncher.api.shared.action.RunScriptAction import RunScriptAction
+#from ulauncher.api.shared.action.RunScriptAction import RunScriptAction
 from ulauncher.api.shared.action.HideWindowAction import HideWindowAction
+from ulauncher.api.shared.action.CopyToClipboardAction import CopyToClipboardAction
 class ClipboardHistoryExtension(Extension):
     def __init__(self):
         super(ClipboardHistoryExtension, self).__init__()
@@ -20,7 +21,8 @@ class KeywordQueryEventListener(EventListener):
                 icon='images/icon.png',
                 name=items[i],
                 description="Click to Open",
-                on_enter=RunScriptAction(f'xdg-open "www.{lines[i]}.com"', [])
+                #on_enter=RunScriptAction(f'xdg-open "www.{lines[i]}.com"', [])
+                on_enter=CopyToClipboardAction(query)
             ))
         return RenderResultListAction(items[:3])
 
