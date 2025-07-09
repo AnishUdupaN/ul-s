@@ -4,7 +4,6 @@ from ulauncher.api.shared.event import KeywordQueryEvent, ItemEnterEvent
 from ulauncher.api.shared.item.ExtensionResultItem import ExtensionResultItem
 from ulauncher.api.shared.action.RenderResultListAction import RenderResultListAction
 from ulauncher.api.shared.action.RunScriptAction import RunScriptAction
-from ulauncher.api.shared.action.HideWindowAction import HideWindowAction
 class ClipboardHistoryExtension(Extension):
     def __init__(self):
         super(ClipboardHistoryExtension, self).__init__()
@@ -14,18 +13,15 @@ class ClipboardHistoryExtension(Extension):
 
 class KeywordQueryEventListener(EventListener):
     def on_event(self, event, extension):
-        query = event.get_argument() or ""
-        num_entries = int(extension.preferences.get('num_entries', 10))
-
         items = ['apple','ball','cat']
         for i in range(len(items)):
             items.append(ExtensionResultItem(
-                icon='images/icon.png',
-                name=query,
+                icon=os.path.join(os.getcwd(),'images/icon.png'),
+                name=items[i],
                 description="Click to Open",
                 on_enter=RunScriptAction(f'xdg-open "www.{lines[i]}.com"', [])
             ))
-        return RenderResultListAction(items[:3])
+        return RenderResultListAction(items[:5])
 
 if __name__ == '__main__':
     ClipboardHistoryExtension().run()
