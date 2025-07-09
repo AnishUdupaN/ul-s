@@ -35,11 +35,10 @@ if __name__ == '__main__':
 
 from ulauncher.api.client.Extension import Extension
 from ulauncher.api.client.EventListener import EventListener
-from ulauncher.api.shared.event import KeywordQueryEvent, ItemEnterEvent, PreferencesEvent, PreferencesUpdateEvent
+from ulauncher.api.shared.event import KeywordQueryEvent, ItemEnterEvent
 from ulauncher.api.shared.item.ExtensionResultItem import ExtensionResultItem
 from ulauncher.api.shared.action.RenderResultListAction import RenderResultListAction
 from ulauncher.api.shared.action.CopyToClipboardAction import CopyToClipboardAction
-from ulauncher.api.shared.action.HideWindowAction import HideWindowAction
 
 
 class ClipboardHistoryExtension(Extension):
@@ -47,18 +46,6 @@ class ClipboardHistoryExtension(Extension):
     def __init__(self):
         super(ClipboardHistoryExtension, self).__init__()
         self.subscribe(KeywordQueryEvent, KeywordQueryEventListener())
-        self.subscribe(PreferencesEvent, PreferencesEventListener())
-        self.subscribe(PreferencesUpdateEvent, PreferencesUpdateEventListener())
-
-
-class PreferencesEventListener(EventListener):
-    def on_event(self, event, extension):
-        extension.preferences.update(event.preferences)
-
-
-class PreferencesUpdateEventListener(EventListener):
-    def on_event(self, event, extension):
-        extension.preferences[event.id] = event.new_value
 
 
 class KeywordQueryEventListener(EventListener):
