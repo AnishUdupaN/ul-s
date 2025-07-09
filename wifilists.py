@@ -39,9 +39,9 @@ def listavailable()->dict:
         else:
             second = '1'
         if third=='':
-            third=False #network is secured
+            third='🔒' #network is secured
         else:
-            third=True #network is open
+            third='' #network is open
         avail[first]=[second,third]
     return avail
 
