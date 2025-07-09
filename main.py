@@ -16,10 +16,11 @@ class mainfn(Extension):
 class KeywordQueryEventListener(EventListener):
     def on_event(self, event, extension):
         items=[]
-        networks= wifilists.listwifi()
-        saved=networks[0]
-        available=networks[1]
+        #networks= wifilists.listwifi()
+        #saved=networks[0]
+        #available=networks[1]
         #saved
+        saved=[1,2,3,4]
         if len(saved)>0:
             items.append(ExtensionResultItem(
                     icon='images/icon.png',
