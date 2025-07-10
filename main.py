@@ -55,14 +55,14 @@ class ItemEnterEventListener(EventListener):
         if a is True:
             # connection success
             items.append(ExtensionResultItem(
-                icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
+                icon='./images/icon.png',
                 name=f'Connected Successfully to {data['SSID']}!',
                 on_enter=DoNothingAction()
             ))
         else:
             # connection failure
             items.append(ExtensionResultItem(
-                icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
+                icon='./images/icon.png',
                 name='Connection Failure',
                 on_enter=DoNothingAction()
             ))

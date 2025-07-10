@@ -11,7 +11,8 @@
     {
       "id": "newextension",
       "type": "keyword",
-      "name": "New Extension",
+      "name": "WiFi Connect",
+      "description": "Connect to wifi networks",
       "default_value": "ab"
     },
     {
