@@ -36,7 +36,7 @@ class KeywordQueryEventListener(EventListener):
                 ))
         
         for i in saved:
-            lockk="" if (saved[i][1]="" else f",{saved[i][1]}")
+            lockk="" if (saved[i][1]=="" else f",{saved[i][1]}")
             print(f'lock is : {lockk}\n\n')
             items.append(ExtensionResultItem(
                     icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
@@ -53,7 +53,7 @@ class KeywordQueryEventListener(EventListener):
                 ))
         for i in available:
             if available[i][1]=="":
-                lockk="" if (available[i][1]="" else f",{available[i][1]}")
+                lockk="" if (available[i][1]=="" else f",{available[i][1]}")
                 print(f'lock is : {lockk}\n\n')
                 items.append(ExtensionResultItem(
                         icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
