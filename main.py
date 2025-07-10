@@ -99,11 +99,11 @@ class ItemEnterEventListener(EventListener):
         else:
             #unsaved network
             print(f"{data['SSID']}:{data['SECURITY']}\n")
-                items.append(ExtensionResultItem(
-                        icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
-                        name=f'Open Network',
-                        on_enter=DoNothingAction()
-                    ))
+            items.append(ExtensionResultItem(
+                    icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
+                    name=f'Open Network',
+                    on_enter=DoNothingAction()
+                ))
 
             with open('/home/anishudupan/temppp/a.txt','a') as filee:
                 filee.write(f"{datetime.datetime.today()} : In Else part {data['SSID']},{data['SECURITY']}\n")
