@@ -67,7 +67,8 @@ class KeywordQueryEventListener(EventListener):
                         description="Cannot Connect",
                         on_enter=DoNothingAction()
                     ))
-            items=items+xavailable1+xavailable2
+        items=items+xavailable1+xavailable2
+
         itemsno=len(saved)+len(available)+2
         return RenderResultListAction(items[:itemsno])
         
