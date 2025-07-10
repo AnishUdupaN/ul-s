@@ -51,7 +51,6 @@ class KeywordQueryEventListener(EventListener):
                     icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
                     name=f'{available[i][0]},{i},{available[i][1]}',
                     on_enter=ExtensionCustomAction({'SSID': i,'SECURITY':available[i][1],'SAVED':False}, keep_app_open=False)
-                    #on_enter=ExtensionCustomAction({'SSID': 'Null'}, keep_app_open=False)
                 ))
         itemsno=len(saved)+len(available)+2
         return RenderResultListAction(items[:itemsno])
@@ -61,36 +60,46 @@ class KeywordQueryEventListener(EventListener):
 
 class ItemEnterEventListener(EventListener):
     def on_event(self, event, extension):
+        query = event.get_argument() or ""
         items=[]
         print('EnterEventListener')
         data = event.get_data()
-        if len(data)==1:
-            print('Hello World') #do nothing ,should be replaced by do nothing API instead of custom instruction.
-        else:
-            if data['SAVED']==True:
-                a=wifilists.SavedConnect(data['SSID'])
-                with open('/home/anishudupan/temppp/a.txt','a') as filee:
-                    filee.write(f"{datetime.datetime.today()} : Connection with {data['SSID']} with status {a}\n")
-                    filee.close()
-                if a==True:
-                    items.append(ExtensionResultItem(
-                        icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
-                        name='Connected Successfully!',
-                        on_enter=DoNothingAction()
-                    ))
-                else:
-                    items.append(ExtensionResultItem(
-                        icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
-                        name='Connection Failure',
-                        on_enter=DoNothingAction()
-                    ))
-                return RenderResultListAction(items[:1])
+    
+        if data['SAVED']==True:
+            #saved network
+            a=wifilists.SavedConnect(data['SSID'])
+            with open('/home/anishudupan/temppp/a.txt','a') as filee:
+                filee.write(f"{datetime.datetime.today()} : Connection with {data['SSID']} with status {a}\n")
+                filee.close()
+            if a==True:
+                #connection success
+                items.append(ExtensionResultItem(
+                    icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
+                    name='Connected Successfully!',
+                    on_enter=DoNothingAction()
+                ))
             else:
-                with open('/home/anishudupan/temppp/a.txt','a') as filee:
-                    filee.write(f"{datetime.datetime.today()} : In Else part {item}\n")
-                    filee.close()
-                #wifilists.UnsavedConnect(data['SSID'])
-        
+                #connection failure
+                items.append(ExtensionResultItem(
+                    icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
+                    name='Connection Failure',
+                    on_enter=DoNothingAction()
+                ))
+            return RenderResultListAction(items[:1])
+        else:
+            #unsaved network
+            query = event.get_argument() or ""
+            items.append(ExtensionResultItem(
+                    icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
+                    name=f'Query : {query}',
+                    on_enter=DoNothingAction()
+                ))
+            with open('/home/anishudupan/temppp/a.txt','a') as filee:
+                filee.write(f"{datetime.datetime.today()} : In Else part {query}\n")
+                filee.close()
+            return RenderResultListAction(items[:1])
+            #wifilists.UnsavedConnect(data['SSID'])
+    
         
 
 if __name__ == '__main__':
