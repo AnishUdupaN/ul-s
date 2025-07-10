@@ -38,8 +38,8 @@ class KeywordQueryEventListener(EventListener):
             lockk = 'nolock' if i[1][1] == "" else 'lock'
             items.append(ExtensionResultItem(
                     icon=f'./images/{lockk}/{i[1][0]}bars.png',
-                    name=i,
-                    on_enter=ExtensionCustomAction({'SSID': i}, keep_app_open=True)
+                    name=i[0],
+                    on_enter=ExtensionCustomAction({'SSID': i[0]}, keep_app_open=True)
                 ))
         num_entries = int(extension.preferences.get('num_entries', 10))
 
