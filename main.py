@@ -7,6 +7,9 @@ from ulauncher.api.shared.item.ExtensionResultItem import ExtensionResultItem
 from ulauncher.api.shared.action.RenderResultListAction import RenderResultListAction
 from ulauncher.api.shared.action.DoNothingAction import DoNothingAction
 from ulauncher.api.shared.action.ExtensionCustomAction import ExtensionCustomAction
+
+#network does not connect to unsaved secure networks
+
 class mainfn(Extension):
     def __init__(self):
         super(mainfn, self).__init__()
@@ -60,7 +63,6 @@ class KeywordQueryEventListener(EventListener):
 
 class ItemEnterEventListener(EventListener):
     def on_event(self, event, extension):
-        query = event.get_argument() or ""
         items=[]
         print('EnterEventListener')
         data = event.get_data()
@@ -88,14 +90,21 @@ class ItemEnterEventListener(EventListener):
             return RenderResultListAction(items[:1])
         else:
             #unsaved network
-            query = event.get_argument() or ""
-            items.append(ExtensionResultItem(
-                    icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
-                    name=f'Query : {query}',
-                    on_enter=DoNothingAction()
-                ))
+            if data['SECURITY']==False:
+                items.append(ExtensionResultItem(
+                        icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
+                        name=f'Open Network',
+                        on_enter=DoNothingAction()
+                    ))
+            else:
+                items.append(ExtensionResultItem(
+                        icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
+                        name=f'Secure Network',
+                        on_enter=DoNothingAction()
+                    ))
+
             with open('/home/anishudupan/temppp/a.txt','a') as filee:
-                filee.write(f"{datetime.datetime.today()} : In Else part {query}\n")
+                filee.write(f"{datetime.datetime.today()} : In Else part {data['SSID']},{data['SECURITY']}\n")
                 filee.close()
             return RenderResultListAction(items[:1])
             #wifilists.UnsavedConnect(data['SSID'])
