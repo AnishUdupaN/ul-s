@@ -38,7 +38,7 @@ class KeywordQueryEventListener(EventListener):
         for i in saved:
             items.append(ExtensionResultItem(
                     icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
-                    name=f'{saved[i][0]},{i},{saved[i][1]}',
+                    name=f'{saved[i][0]},{i}{"" if (saved[i][1]="" else f",{saved[i][1]}")}',
                     on_enter=ExtensionCustomAction({'SSID': i,'SECURITY':saved[i][1],'SAVED':True}, keep_app_open=True)
                 ))
         #not saved
@@ -46,15 +46,24 @@ class KeywordQueryEventListener(EventListener):
             items.append(ExtensionResultItem(
                     icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
                     name='Available',
-                    description="Cannot Connect Here",
+                    description="Not Fully working",
                     on_enter=DoNothingAction()
                 ))
         for i in available:
-            items.append(ExtensionResultItem(
-                    icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
-                    name=f'{available[i][0]},{i},{available[i][1]}',
-                    on_enter=ExtensionCustomAction({'SSID': i,'SECURITY':available[i][1],'SAVED':False}, keep_app_open=True)
-                ))
+            if available[i][1]=="":
+                items.append(ExtensionResultItem(
+                        icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
+                        name=f'{available[i][0]},{i}{"" if (available[i][1]="" else f",{available[i][1]}")}',
+                        description="Click to Connect"
+                        on_enter=ExtensionCustomAction({'SSID': i,'SECURITY':available[i][1],'SAVED':False}, keep_app_open=True)
+                    ))
+            else:
+                items.append(ExtensionResultItem(
+                        icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
+                        name=f'{available[i][0]},{i},{available[i][1]}',
+                        description="Cannot Connect"
+                        on_enter=DoNothingAction()
+                    ))
         itemsno=len(saved)+len(available)+2
         return RenderResultListAction(items[:itemsno])
         
