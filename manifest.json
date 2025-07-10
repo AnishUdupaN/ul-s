@@ -3,7 +3,7 @@
   "name": "WiFi Connect",
   "description": "Connect to wifi networks",
   "developer_name": "Anish Udupa N",
-  "icon": "images/icon.png",
+  "icon": "./images/icon.png",
   "options": {
         "query_debounce": 0.5
     },
