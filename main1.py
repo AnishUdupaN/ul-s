@@ -5,7 +5,6 @@ from ulauncher.api.client.EventListener import EventListener
 from ulauncher.api.shared.event import KeywordQueryEvent, ItemEnterEvent
 from ulauncher.api.shared.item.ExtensionResultItem import ExtensionResultItem
 from ulauncher.api.shared.action.RenderResultListAction import RenderResultListAction
-from ulauncher.api.shared.action.DoNothingAction import DoNothingAction
 from ulauncher.api.shared.action.ExtensionCustomAction import ExtensionCustomAction
 class mainfn(Extension):
     def __init__(self):
@@ -29,7 +28,7 @@ class KeywordQueryEventListener(EventListener):
                     icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
                     name='Saved and Available',
                     description="Click to Connect",
-                    on_enter=DoNothingAction()
+                    on_enter=ExtensionCustomAction({'SSID': 'Null'}, keep_app_open=False)
                 ))
         
         for i in saved:
@@ -44,7 +43,7 @@ class KeywordQueryEventListener(EventListener):
                     icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
                     name='Available',
                     description="Cannot Connect Here",
-                    on_enter=DoNothingAction()
+                    on_enter=ExtensionCustomAction({'SSID': 'Null'}, keep_app_open=False)
                 ))
         for i in available:
             items.append(ExtensionResultItem(
@@ -76,13 +75,13 @@ class ItemEnterEventListener(EventListener):
                     items.append(ExtensionResultItem(
                         icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
                         name='Connected Successfully!',
-                        on_enter=DoNothingAction()
+                        on_enter=ExtensionCustomAction({'SSID': 'Null'}, keep_app_open=False) #do nothing action
                     ))
                 else:
                     items.append(ExtensionResultItem(
                         icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
                         name='Connection Failure',
-                        on_enter=DoNothingAction()
+                        on_enter=ExtensionCustomAction({'SSID': 'Null'}, keep_app_open=False) #do nothing action
                     ))
                 return RenderResultListAction(items[:1])
             else:
