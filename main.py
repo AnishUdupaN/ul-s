@@ -52,7 +52,7 @@ class KeywordQueryEventListener(EventListener):
         xavailable2=[]
         for i in available:
             if available[i][1]=="":
-                print(f"Unsaved,SSID:{available[i][0]},Security:True\n\n")
+                print(f"Unsaved,SSID:{i},Security:False\n\n")
                 xavailable1.append(ExtensionResultItem(
                         icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
                         name=f'{available[i][0]},{i}\t\t{available[i][1]}',
@@ -60,7 +60,7 @@ class KeywordQueryEventListener(EventListener):
                         on_enter=ExtensionCustomAction({'SSID': i,'SECURITY':available[i][1],'SAVED':False}, keep_app_open=True)
                     ))
             else:
-                print(f"Unsaved,SSID:{available[i][0]},Security:True\n\n")
+                print(f"Unsaved,SSID:{i},Security:True\n\n")
                 xavailable2.append(ExtensionResultItem(
                         icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
                         name=f'{available[i][0]},{i}\t\t{available[i][1]}',
