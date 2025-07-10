@@ -2,7 +2,7 @@ import datetime
 import wifilists
 from ulauncher.api.client.Extension import Extension
 from ulauncher.api.client.EventListener import EventListener
-from ulauncher.api.shared.event import KeywordQueryEvent, ItemEnterEvent
+from ulauncher.api.shared.event import KeywordQueryEvent, ItemEnterEvent, PreferencesEvent, PreferencesUpdateEvent
 from ulauncher.api.shared.item.ExtensionResultItem import ExtensionResultItem
 from ulauncher.api.shared.action.RenderResultListAction import RenderResultListAction
 from ulauncher.api.shared.action.DoNothingAction import DoNothingAction
@@ -16,6 +16,17 @@ class mainfn(Extension):
         print('Initialized\n\n')
         self.subscribe(KeywordQueryEvent, KeywordQueryEventListener())
         self.subscribe(ItemEnterEvent, ItemEnterEventListener())
+        self.subscribe(PreferencesEvent, PreferencesEventListener())
+        self.subscribe(PreferencesUpdateEvent, PreferencesUpdateEventListener())
+
+class PreferencesEventListener(EventListener):
+    def on_event(self, event, extension):
+        extension.preferences.update(event.preferences)
+
+
+class PreferencesUpdateEventListener(EventListener):
+    def on_event(self, event, extension):
+        extension.preferences[event.id] = event.new_value
 
 
 class KeywordQueryEventListener(EventListener):
@@ -30,31 +41,16 @@ class KeywordQueryEventListener(EventListener):
                     name=i,
                     on_enter=ExtensionCustomAction({'SSID': i}, keep_app_open=True)
                 ))
-        itemsno=len(saved)
-        return RenderResultListAction(items[:itemsno])
+        num_entries = int(extension.preferences.get('num_entries', 10))
+
+        return RenderResultListAction(items[:no_entries])
         
 
 class ItemEnterEventListener(EventListener):
     def on_event(self, event, extension):
-        """
-        Main Logic:
-        if IsSavedNetwork:
-            connect()
-            if ConnectionSuccessful:
-                print("Success")
-            else:
-                print("Failure")
-        else:
-            connect()
-            if ConnectionSuccessful:
-                print("Success")
-            else:
-                print("Failure")
-        """
         items=[]
         print('EnterEventListener')
         data = event.get_data()
-        #saved network
         a=wifilists.Connect(data['SSID'])
         if a==True:
             #connection success

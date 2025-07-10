@@ -10,6 +10,12 @@
       "type": "keyword",
       "name": "New Extension",
       "default_value": "ab"
+    },
+    {
+      "id": "num_entries",
+      "type": "input",
+      "name": "Number of WiFi networks to show",
+      "default_value": "10"
     }
   ]
 }
