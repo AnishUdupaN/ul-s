@@ -8,7 +8,6 @@ from ulauncher.api.shared.action.RenderResultListAction import RenderResultListA
 from ulauncher.api.shared.action.DoNothingAction import DoNothingAction
 from ulauncher.api.shared.action.ExtensionCustomAction import ExtensionCustomAction
 
-#network does not connect to unsaved secure networks
 
 class mainfn(Extension):
     def __init__(self):
