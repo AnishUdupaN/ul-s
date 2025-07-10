@@ -22,10 +22,12 @@ class KeywordQueryEventListener(EventListener):
     def on_event(self, event, extension):
         items=[]
         print('On Event\n\n')
-        networks= wifilists.listwifi()
-        saved=networks[0]
-        available=networks[1]
+        #networks= wifilists.listwifi()
+        #saved=networks[0]
+        #available=networks[1]
+        saved=wifilists.listavailable()
         #saved
+        """
         if len(saved)>0:
             items.append(ExtensionResultItem(
                     icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
@@ -33,15 +35,16 @@ class KeywordQueryEventListener(EventListener):
                     description="Click to Connect",
                     on_enter=DoNothingAction()
                 ))
-        
+        """
         for i in saved:
             lockk='nolock' if saved[i][1]=="" else 'lock'
             items.append(ExtensionResultItem(
                     icon=f'./images/{lockk}/{saved[i][0]}bars.png',
                     name=i,
-                    on_enter=ExtensionCustomAction({'SSID': i,'SECURITY':saved[i][1],'SAVED':True}, keep_app_open=True)
+                    on_enter=ExtensionCustomAction({'SSID': i}, keep_app_open=True)
                 ))
         #not saved
+        """
         if len(available)>0:
             items.append(ExtensionResultItem(
                     icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
@@ -49,19 +52,19 @@ class KeywordQueryEventListener(EventListener):
                     description="Not Fully working",
                     on_enter=DoNothingAction()
                 ))
+        """
+        available=[]
         for i in available:
             lockk='nolock' if available[i][1]=="" else 'lock'
             items.append(ExtensionResultItem(
                     icon=f'./images/{lockk}/{available[i][0]}bars.png',
                     name=i,
                     description="Click to Connect",
-                    on_enter=ExtensionCustomAction({'SSID': i,'SECURITY':available[i][1],'SAVED':False}, keep_app_open=True)
+                    on_enter=ExtensionCustomAction({'SSID': i}, keep_app_open=True)
                 ))
         itemsno=len(saved)+len(available)+2
         return RenderResultListAction(items[:itemsno])
         
-        return RenderResultListAction(items[:1])
-
 
 class ItemEnterEventListener(EventListener):
     def on_event(self, event, extension):
@@ -83,42 +86,23 @@ class ItemEnterEventListener(EventListener):
         items=[]
         print('EnterEventListener')
         data = event.get_data()
-        if data['SAVED']==True:
-            #saved network
-            a=wifilists.SavedConnect(data['SSID'])
-            if a==True:
-                #connection success
-                items.append(ExtensionResultItem(
-                    icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
-                    name=f'Connected Successfully to {data['SSID']}!',
-                    on_enter=DoNothingAction()
-                ))
-            else:
-                #connection failure
-                items.append(ExtensionResultItem(
-                    icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
-                    name='Connection Failure',
-                    on_enter=DoNothingAction()
-                ))
-            return RenderResultListAction(items[:1])
+        #saved network
+        a=wifilists.Connect(data['SSID'])
+        if a==True:
+            #connection success
+            items.append(ExtensionResultItem(
+                icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
+                name=f'Connected Successfully to {data['SSID']}!',
+                on_enter=DoNothingAction()
+            ))
         else:
-            #unsaved network
-            a=wifilists.UnsavedConnect(data['SSID'])
-            if a==True:
-                #connection success
-                items.append(ExtensionResultItem(
-                    icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
-                    name=f'Connected Successfully to {data['SSID']}!',
-                    on_enter=DoNothingAction()
-                ))
-            else:
-                #connection failure
-                items.append(ExtensionResultItem(
-                    icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
-                    name='Connection Failure',
-                    on_enter=DoNothingAction()
-                ))
-            return RenderResultListAction(items[:1])            #wifilists.UnsavedConnect(data['SSID'])
+            #connection failure
+            items.append(ExtensionResultItem(
+                icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
+                name='Connection Failure',
+                on_enter=DoNothingAction()
+            ))
+        return RenderResultListAction(items[:1])
     
         
 

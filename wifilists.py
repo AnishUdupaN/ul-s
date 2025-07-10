@@ -65,7 +65,7 @@ def listwifi()->tuple:
     return fulldict
 
 
-def SavedConnect(ssid)->bool:
+def Connect(ssid)->bool:
     """
     Connects to the given WiFi network given it is a Saved Network.
     """
@@ -93,7 +93,7 @@ def UnsavedConnect(ssid)->bool:
 
 
 
-if __name__=="__main__":
+if __name__=="__main_":
     str1="comm -12 <(nmcli -t -f NAME connection show | sort) <(nmcli -t -f SSID device wifi list | sort)"
     str2="comm -23 <(nmcli -t -f SSID device wifi list | sort | uniq) <(nmcli -t -f NAME connection show | sort | uniq)"
     saved="nmcli -f NAME connection show"
@@ -118,3 +118,5 @@ if __name__=="__main__":
     print(avail)
     print('saved : ',output1)
     print('Available : ',output2)
+
+print(listavailable())
