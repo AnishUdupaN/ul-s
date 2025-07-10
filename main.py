@@ -1,5 +1,3 @@
-import datetime
-import wifilists
 from ulauncher.api.client.Extension import Extension
 from ulauncher.api.client.EventListener import EventListener
 from ulauncher.api.shared.event import KeywordQueryEvent, ItemEnterEvent, PreferencesEvent, PreferencesUpdateEvent
@@ -7,16 +5,18 @@ from ulauncher.api.shared.item.ExtensionResultItem import ExtensionResultItem
 from ulauncher.api.shared.action.RenderResultListAction import RenderResultListAction
 from ulauncher.api.shared.action.DoNothingAction import DoNothingAction
 from ulauncher.api.shared.action.ExtensionCustomAction import ExtensionCustomAction
+import wifilists
 
 
-class mainfn(Extension):
+class MainFn(Extension):
     def __init__(self):
-        super(mainfn, self).__init__()
+        super(MainFn, self).__init__()
         print('Initialized\n\n')
         self.subscribe(KeywordQueryEvent, KeywordQueryEventListener())
         self.subscribe(ItemEnterEvent, ItemEnterEventListener())
         self.subscribe(PreferencesEvent, PreferencesEventListener())
         self.subscribe(PreferencesUpdateEvent, PreferencesUpdateEventListener())
+
 
 class PreferencesEventListener(EventListener):
     def on_event(self, event, extension):
@@ -30,11 +30,12 @@ class PreferencesUpdateEventListener(EventListener):
 
 class KeywordQueryEventListener(EventListener):
     def on_event(self, event, extension):
-        items=[]
+        items = []
         print('On Event\n\n')
-        saved=wifilists.listavailable()
+        saved = wifilists.listavailable()
+        print(saved.items())
         for i in saved:
-            lockk='nolock' if saved[i][1]=="" else 'lock'
+            lockk = 'nolock' if saved[i][1] == "" else 'lock'
             items.append(ExtensionResultItem(
                     icon=f'./images/{lockk}/{saved[i][0]}bars.png',
                     name=i,
@@ -43,34 +44,30 @@ class KeywordQueryEventListener(EventListener):
         num_entries = int(extension.preferences.get('num_entries', 10))
 
         return RenderResultListAction(items[:num_entries])
-        
+
 
 class ItemEnterEventListener(EventListener):
     def on_event(self, event, extension):
-        items=[]
+        items = []
         print('EnterEventListener')
         data = event.get_data()
-        a=wifilists.Connect(data['SSID'])
-        if a==True:
-            #connection success
+        a = wifilists.Connect(data['SSID'])
+        if a is True:
+            # connection success
             items.append(ExtensionResultItem(
                 icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
                 name=f'Connected Successfully to {data['SSID']}!',
                 on_enter=DoNothingAction()
             ))
         else:
-            #connection failure
+            # connection failure
             items.append(ExtensionResultItem(
                 icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
                 name='Connection Failure',
                 on_enter=DoNothingAction()
             ))
         return RenderResultListAction(items[:1])
-    
-        
+
 
 if __name__ == '__main__':
-    mainfn().run()
-    
-
-
+    MainFn().run()
