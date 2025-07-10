@@ -33,7 +33,6 @@ class KeywordQueryEventListener(EventListener):
         items = []
         print('On Event\n\n')
         saved = wifilists.listavailable()
-        print(saved.items())
         for i in saved.items():
             lockk = 'nolock' if i[1][1] == "" else 'lock'
             items.append(ExtensionResultItem(
