@@ -36,9 +36,11 @@ class KeywordQueryEventListener(EventListener):
                 ))
         
         for i in saved:
+            lockk="" if (saved[i][1]="" else f",{saved[i][1]}")
+            print(f'lock is : {lockk}\n\n')
             items.append(ExtensionResultItem(
                     icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
-                    name=f'{saved[i][0]},{i}{"" if (saved[i][1]="" else f",{saved[i][1]}")}',
+                    name=f'{saved[i][0]},{i}{lockk}',
                     on_enter=ExtensionCustomAction({'SSID': i,'SECURITY':saved[i][1],'SAVED':True}, keep_app_open=True)
                 ))
         #not saved
@@ -51,9 +53,11 @@ class KeywordQueryEventListener(EventListener):
                 ))
         for i in available:
             if available[i][1]=="":
+                lockk="" if (available[i][1]="" else f",{available[i][1]}")
+                print(f'lock is : {lockk}\n\n')
                 items.append(ExtensionResultItem(
                         icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
-                        name=f'{available[i][0]},{i}{"" if (available[i][1]="" else f",{available[i][1]}")}',
+                        name=f'{available[i][0]},{i}{lockk}',
                         description="Click to Connect"
                         on_enter=ExtensionCustomAction({'SSID': i,'SECURITY':available[i][1],'SAVED':False}, keep_app_open=True)
                     ))
