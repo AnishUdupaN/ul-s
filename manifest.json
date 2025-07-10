@@ -4,6 +4,9 @@
   "description": "Connect to wifi networks",
   "developer_name": "Anish Udupa N",
   "icon": "images/icon.png",
+  "options": {
+        "query_debounce": 0.5
+    },
   "preferences": [
     {
       "id": "newextension",
