@@ -53,7 +53,7 @@ class KeywordQueryEventListener(EventListener):
             items.append(ExtensionResultItem(
                     icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
                     name=f'{available[i][0]},{i},{available[i][1]}',
-                    on_enter=ExtensionCustomAction({'SSID': i,'SECURITY':available[i][1],'SAVED':False}, keep_app_open=False)
+                    on_enter=ExtensionCustomAction({'SSID': i,'SECURITY':available[i][1],'SAVED':False}, keep_app_open=True)
                 ))
         itemsno=len(saved)+len(available)+2
         return RenderResultListAction(items[:itemsno])
