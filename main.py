@@ -50,10 +50,10 @@ class KeywordQueryEventListener(EventListener):
                     on_enter=DoNothingAction()
                 ))
         for i in available:
-            lockk='nolock' if saved[i][1]=="" else 'lock'
+            lockk='nolock' if available[i][1]=="" else 'lock'
             items.append(ExtensionResultItem(
-                    icon=f'./images/{lockk}/{saved[i][0]}bars.png',
-                    name=f'{available[i][0]},{i}\t\t{available[i][1]}',
+                    icon=f'./images/{lockk}/{available[i][0]}bars.png',
+                    name=i,
                     description="Click to Connect",
                     on_enter=ExtensionCustomAction({'SSID': i,'SECURITY':available[i][1],'SAVED':False}, keep_app_open=True)
                 ))
