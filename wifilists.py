@@ -29,15 +29,15 @@ def listavailable()->dict:
         third=i[:-1]
         second=int(second)
         if second>80 and second<=100:
-            second = '5'
-        elif second>60 and second<=80:
             second = '4'
-        elif second>40 and second<=60:
+        elif second>60 and second<=80:
             second = '3'
-        elif second>20 and second<=40:
+        elif second>40 and second<=60:
             second = '2'
-        else:
+        elif second>20 and second<=40:
             second = '1'
+        else:
+            second = '0'
         if third=='':
             third='' #network is open
         else:

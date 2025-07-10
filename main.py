@@ -35,9 +35,10 @@ class KeywordQueryEventListener(EventListener):
                 ))
         
         for i in saved:
+            lockk='nolock' if saved[i][1]=="" else 'lock'
             items.append(ExtensionResultItem(
-                    icon='/home/anishudupan/projects/ul-s/images/4bars.png',
-                    name=f'{saved[i][0]},{i}\t\t{saved[i][1]}',
+                    icon=f'./images/{lockk}/{saved[i][0]}bars.png',
+                    name=i,
                     on_enter=ExtensionCustomAction({'SSID': i,'SECURITY':saved[i][1],'SAVED':True}, keep_app_open=True)
                 ))
         #not saved
@@ -49,8 +50,9 @@ class KeywordQueryEventListener(EventListener):
                     on_enter=DoNothingAction()
                 ))
         for i in available:
+            lockk='nolock' if saved[i][1]=="" else 'lock'
             items.append(ExtensionResultItem(
-                    icon='/home/anishudupan/projects/ul-s/images/4bars.png',
+                    icon=f'./images/{lockk}/{saved[i][0]}bars.png',
                     name=f'{available[i][0]},{i}\t\t{available[i][1]}',
                     description="Click to Connect",
                     on_enter=ExtensionCustomAction({'SSID': i,'SECURITY':available[i][1],'SAVED':False}, keep_app_open=True)
