@@ -35,9 +35,9 @@ class KeywordQueryEventListener(EventListener):
         saved = wifilists.listavailable()
         print(saved.items())
         for i in saved.items():
-            lockk = 'nolock' if saved[i][1] == "" else 'lock'
+            lockk = 'nolock' if i[1][1] == "" else 'lock'
             items.append(ExtensionResultItem(
-                    icon=f'./images/{lockk}/{saved[i][0]}bars.png',
+                    icon=f'./images/{lockk}/{i[1][0]}bars.png',
                     name=i,
                     on_enter=ExtensionCustomAction({'SSID': i}, keep_app_open=True)
                 ))
