@@ -91,7 +91,7 @@ class ItemEnterEventListener(EventListener):
         else:
             #unsaved network
             print(f"{data['SSID']}:{data['SECURITY']}\n")
-            if data['SECURITY']==False:
+            if data['SECURITY']=="":
                 items.append(ExtensionResultItem(
                         icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
                         name=f'Open Network',
