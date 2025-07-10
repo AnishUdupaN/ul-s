@@ -26,7 +26,6 @@ class KeywordQueryEventListener(EventListener):
         saved=networks[0]
         available=networks[1]
         #saved
-        #saved=[1,2,3,4]
         if len(saved)>0:
             items.append(ExtensionResultItem(
                     icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
@@ -36,11 +35,9 @@ class KeywordQueryEventListener(EventListener):
                 ))
         
         for i in saved:
-            lockk="" if saved[i][1]=="" else f",{saved[i][1]}"
-            print(f'lock is : {lockk}\n\n')
             items.append(ExtensionResultItem(
                     icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
-                    name=f'{saved[i][0]},{i}{lockk}',
+                    name=f'{saved[i][0]},{i}\t\t{saved[i][1]}',
                     on_enter=ExtensionCustomAction({'SSID': i,'SECURITY':saved[i][1],'SAVED':True}, keep_app_open=True)
                 ))
         #not saved
@@ -53,18 +50,16 @@ class KeywordQueryEventListener(EventListener):
                 ))
         for i in available:
             if available[i][1]=="":
-                lockk="" if available[i][1]=="" else f",{available[i][1]}"
-                print(f'lock is : {lockk}\n\n')
                 items.append(ExtensionResultItem(
                         icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
-                        name=f'{available[i][0]},{i}{lockk}',
+                        name=f'{available[i][0]},{i}\t\t{available[i][1]}',
                         description="Click to Connect",
                         on_enter=ExtensionCustomAction({'SSID': i,'SECURITY':available[i][1],'SAVED':False}, keep_app_open=True)
                     ))
             else:
                 items.append(ExtensionResultItem(
                         icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
-                        name=f'{available[i][0]},{i},{available[i][1]}',
+                        name=f'{available[i][0]},{i}\t\t{available[i][1]}',
                         description="Cannot Connect",
                         on_enter=DoNothingAction()
                     ))
@@ -104,16 +99,9 @@ class ItemEnterEventListener(EventListener):
         else:
             #unsaved network
             print(f"{data['SSID']}:{data['SECURITY']}\n")
-            if data['SECURITY']=="":
                 items.append(ExtensionResultItem(
                         icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
                         name=f'Open Network',
-                        on_enter=DoNothingAction()
-                    ))
-            else:
-                items.append(ExtensionResultItem(
-                        icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
-                        name=f'Secure Network',
                         on_enter=DoNothingAction()
                     ))
 
