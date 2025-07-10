@@ -58,14 +58,14 @@ class KeywordQueryEventListener(EventListener):
                 items.append(ExtensionResultItem(
                         icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
                         name=f'{available[i][0]},{i}{lockk}',
-                        description="Click to Connect"
+                        description="Click to Connect",
                         on_enter=ExtensionCustomAction({'SSID': i,'SECURITY':available[i][1],'SAVED':False}, keep_app_open=True)
                     ))
             else:
                 items.append(ExtensionResultItem(
                         icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
                         name=f'{available[i][0]},{i},{available[i][1]}',
-                        description="Cannot Connect"
+                        description="Cannot Connect",
                         on_enter=DoNothingAction()
                     ))
         itemsno=len(saved)+len(available)+2
