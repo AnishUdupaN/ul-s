@@ -1,19 +1,10 @@
 import subprocess
 
-def listsaved()->list:
-    str="nmcli -f NAME connection show"
-    result1 = subprocess.run(["bash","-c",str], capture_output=True, text=True)
-    output1 = result1.stdout
-    output1=output1.split('\n')
-    output1 = [x.strip() for x in output1 if x != '']
-    output1=output1[1:]
-    return output1
-
 
 def listavailable()->dict:
     """
     Returns a dictionary {SSID:[Strength,Security]}
-    where security:True if Network is secure,False if Network is open
+    where security:Lock emoji if Network is secure,"" if Network is open
     """
     available="nmcli -t -f SSID,SIGNAL,SECURITY device wifi list | sort -t: -k2 -nr | awk -F: '!seen[$1]++'"
     result2 = subprocess.run(["bash","-c",available], capture_output=True, text=True)
@@ -46,25 +37,6 @@ def listavailable()->dict:
     return avail
 
 
-def listwifi()->tuple:
-    """
-    Returns an list [SavedAndAvailable,OnlyAvailable]
-    where SavedAndAvailable->dict{SSID:Strength}
-          OnlyAvailable->dict{SSID:Strength}
-    """
-    saved=listsaved()
-    available=listavailable()
-    savednavailable={}
-    onlyavailable={}
-    for i in available:
-        if i in saved:
-            savednavailable[i]=available[i]
-        else:
-            onlyavailable[i]=available[i]
-    fulldict=(savednavailable,onlyavailable)
-    return fulldict
-
-
 def Connect(ssid)->bool:
     """
     Connects to the given WiFi network given it is a Saved Network.
@@ -76,18 +48,6 @@ def Connect(ssid)->bool:
         return False
     else:
         return True
-
-def UnsavedConnect(ssid)->bool:
-    """
-    Connects to the given WiFi network given it is a Saved Network.
-    """
-    res=subprocess.run(["bash","-c",f"nmcli dev wifi connect {ssid}"], capture_output=True, text=True)
-    result=res.stdout
-    print('SavedConnect Result :',result,end='\n\n')
-    if "successfully" in result:
-        return True
-    else:
-        return False
 
 
 
@@ -118,5 +78,3 @@ if __name__=="__main_":
     print(avail)
     print('saved : ',output1)
     print('Available : ',output2)
-
-print(listavailable())
