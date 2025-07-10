@@ -48,21 +48,24 @@ class KeywordQueryEventListener(EventListener):
                     description="Not Fully working",
                     on_enter=DoNothingAction()
                 ))
+        xavailable1=[]
+        xavailable2=[]
         for i in available:
             if available[i][1]=="":
-                items.append(ExtensionResultItem(
+                xavailable1.append(ExtensionResultItem(
                         icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
                         name=f'{available[i][0]},{i}\t\t{available[i][1]}',
                         description="Click to Connect",
                         on_enter=ExtensionCustomAction({'SSID': i,'SECURITY':available[i][1],'SAVED':False}, keep_app_open=True)
                     ))
             else:
-                items.append(ExtensionResultItem(
+                xavailable2.append(ExtensionResultItem(
                         icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
                         name=f'{available[i][0]},{i}\t\t{available[i][1]}',
                         description="Cannot Connect",
                         on_enter=DoNothingAction()
                     ))
+            items=items+xavailable1+xavailable2
         itemsno=len(saved)+len(available)+2
         return RenderResultListAction(items[:itemsno])
         
