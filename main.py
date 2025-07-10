@@ -36,7 +36,7 @@ class KeywordQueryEventListener(EventListener):
         
         for i in saved:
             items.append(ExtensionResultItem(
-                    icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
+                    icon='/home/anishudupan/projects/ul-s/images/4bars.png',
                     name=f'{saved[i][0]},{i}\t\t{saved[i][1]}',
                     on_enter=ExtensionCustomAction({'SSID': i,'SECURITY':saved[i][1],'SAVED':True}, keep_app_open=True)
                 ))
@@ -48,25 +48,13 @@ class KeywordQueryEventListener(EventListener):
                     description="Not Fully working",
                     on_enter=DoNothingAction()
                 ))
-        xavailable1=[]
-        xavailable2=[]
         for i in available:
-            if available[i][1]=="":
-                xavailable1.append(ExtensionResultItem(
-                        icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
-                        name=f'{available[i][0]},{i}\t\t{available[i][1]}',
-                        description="Click to Connect",
-                        on_enter=ExtensionCustomAction({'SSID': i,'SECURITY':available[i][1],'SAVED':False}, keep_app_open=True)
-                    ))
-            else:
-                xavailable2.append(ExtensionResultItem(
-                        icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
-                        name=f'{available[i][0]},{i}\t\t{available[i][1]}',
-                        description="Cannot Connect",
-                        #on_enter=DoNothingAction()
-                        on_enter=ExtensionCustomAction({'SSID': i,'SECURITY':available[i][1],'SAVED':False}, keep_app_open=True)                        
-                    ))
-        items=items+xavailable1+xavailable2 #items=saved+UnsavedOpen+UnsavedClosed
+            items.append(ExtensionResultItem(
+                    icon='/home/anishudupan/projects/ul-s/images/4bars.png',
+                    name=f'{available[i][0]},{i}\t\t{available[i][1]}',
+                    description="Click to Connect",
+                    on_enter=ExtensionCustomAction({'SSID': i,'SECURITY':available[i][1],'SAVED':False}, keep_app_open=True)
+                ))
         itemsno=len(saved)+len(available)+2
         return RenderResultListAction(items[:itemsno])
         
