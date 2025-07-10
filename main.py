@@ -22,20 +22,7 @@ class KeywordQueryEventListener(EventListener):
     def on_event(self, event, extension):
         items=[]
         print('On Event\n\n')
-        #networks= wifilists.listwifi()
-        #saved=networks[0]
-        #available=networks[1]
         saved=wifilists.listavailable()
-        #saved
-        """
-        if len(saved)>0:
-            items.append(ExtensionResultItem(
-                    icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
-                    name='Saved and Available',
-                    description="Click to Connect",
-                    on_enter=DoNothingAction()
-                ))
-        """
         for i in saved:
             lockk='nolock' if saved[i][1]=="" else 'lock'
             items.append(ExtensionResultItem(
@@ -43,26 +30,7 @@ class KeywordQueryEventListener(EventListener):
                     name=i,
                     on_enter=ExtensionCustomAction({'SSID': i}, keep_app_open=True)
                 ))
-        #not saved
-        """
-        if len(available)>0:
-            items.append(ExtensionResultItem(
-                    icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
-                    name='Available',
-                    description="Not Fully working",
-                    on_enter=DoNothingAction()
-                ))
-        """
-        available=[]
-        for i in available:
-            lockk='nolock' if available[i][1]=="" else 'lock'
-            items.append(ExtensionResultItem(
-                    icon=f'./images/{lockk}/{available[i][0]}bars.png',
-                    name=i,
-                    description="Click to Connect",
-                    on_enter=ExtensionCustomAction({'SSID': i}, keep_app_open=True)
-                ))
-        itemsno=len(saved)+len(available)+2
+        itemsno=len(saved)
         return RenderResultListAction(items[:itemsno])
         
 
