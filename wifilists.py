@@ -77,6 +77,21 @@ def SavedConnect(ssid)->bool:
     else:
         return True
 
+def UnsavedConnect(ssid)->bool:
+    """
+    Connects to the given WiFi network given it is a Saved Network.
+    """
+    res=subprocess.run(["bash","-c",f"nmcli dev wifi connect {ssid}"], capture_output=True, text=True)
+    result=res.stdout
+    print('SavedConnect Result :',result,end='\n\n')
+    if "successfully" in result:
+        return True
+    else:
+        return False
+
+
+
+
 
 if __name__=="__main__":
     str1="comm -12 <(nmcli -t -f NAME connection show | sort) <(nmcli -t -f SSID device wifi list | sort)"

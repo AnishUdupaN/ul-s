@@ -52,7 +52,6 @@ class KeywordQueryEventListener(EventListener):
         xavailable2=[]
         for i in available:
             if available[i][1]=="":
-                print(f"Unsaved,SSID:{i},Security:False\n\n")
                 xavailable1.append(ExtensionResultItem(
                         icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
                         name=f'{available[i][0]},{i}\t\t{available[i][1]}',
@@ -60,15 +59,13 @@ class KeywordQueryEventListener(EventListener):
                         on_enter=ExtensionCustomAction({'SSID': i,'SECURITY':available[i][1],'SAVED':False}, keep_app_open=True)
                     ))
             else:
-                print(f"Unsaved,SSID:{i},Security:True\n\n")
                 xavailable2.append(ExtensionResultItem(
                         icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
                         name=f'{available[i][0]},{i}\t\t{available[i][1]}',
                         description="Cannot Connect",
                         on_enter=DoNothingAction()
                     ))
-        items=items+xavailable1+xavailable2
-
+        items=items+xavailable1+xavailable2 #items=saved+UnsavedOpen+UnsavedClosed
         itemsno=len(saved)+len(available)+2
         return RenderResultListAction(items[:itemsno])
         
@@ -77,21 +74,32 @@ class KeywordQueryEventListener(EventListener):
 
 class ItemEnterEventListener(EventListener):
     def on_event(self, event, extension):
+        """
+        Main Logic:
+        if IsSavedNetwork:
+            connect()
+            if ConnectionSuccessful:
+                print("Success")
+            else:
+                print("Failure")
+        else:
+            connect()
+            if ConnectionSuccessful:
+                print("Success")
+            else:
+                print("Failure")
+        """
         items=[]
         print('EnterEventListener')
         data = event.get_data()
-    
         if data['SAVED']==True:
             #saved network
             a=wifilists.SavedConnect(data['SSID'])
-            with open('/home/anishudupan/temppp/a.txt','a') as filee:
-                filee.write(f"{datetime.datetime.today()} : Connection with {data['SSID']} with status {a}\n")
-                filee.close()
             if a==True:
                 #connection success
                 items.append(ExtensionResultItem(
                     icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
-                    name='Connected Successfully!',
+                    name=f'Connected Successfully to {data['SSID']}!',
                     on_enter=DoNothingAction()
                 ))
             else:
@@ -104,18 +112,22 @@ class ItemEnterEventListener(EventListener):
             return RenderResultListAction(items[:1])
         else:
             #unsaved network
-            print(f"{data['SSID']}:{data['SECURITY']}\n")
-            items.append(ExtensionResultItem(
+            a=wifilists.UnsavedConnect(data['SSID'])
+            if a==True:
+                #connection success
+                items.append(ExtensionResultItem(
                     icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
-                    name=f'Open Network',
+                    name=f'Connected Successfully to {data['SSID']}!',
                     on_enter=DoNothingAction()
                 ))
-
-            with open('/home/anishudupan/temppp/a.txt','a') as filee:
-                filee.write(f"{datetime.datetime.today()} : In Else part {data['SSID']},{data['SECURITY']}\n")
-                filee.close()
-            return RenderResultListAction(items[:1])
-            #wifilists.UnsavedConnect(data['SSID'])
+            else:
+                #connection failure
+                items.append(ExtensionResultItem(
+                    icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
+                    name='Connection Failure',
+                    on_enter=DoNothingAction()
+                ))
+            return RenderResultListAction(items[:1])            #wifilists.UnsavedConnect(data['SSID'])
     
         
 
