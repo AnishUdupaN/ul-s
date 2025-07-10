@@ -43,7 +43,7 @@ class KeywordQueryEventListener(EventListener):
                 ))
         num_entries = int(extension.preferences.get('num_entries', 10))
 
-        return RenderResultListAction(items[:no_entries])
+        return RenderResultListAction(items[:num_entries])
         
 
 class ItemEnterEventListener(EventListener):
