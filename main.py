@@ -63,7 +63,8 @@ class KeywordQueryEventListener(EventListener):
                         icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
                         name=f'{available[i][0]},{i}\t\t{available[i][1]}',
                         description="Cannot Connect",
-                        on_enter=DoNothingAction()
+                        #on_enter=DoNothingAction()
+                        on_enter=ExtensionCustomAction({'SSID': i,'SECURITY':available[i][1],'SAVED':False}, keep_app_open=True)                        
                     ))
         items=items+xavailable1+xavailable2 #items=saved+UnsavedOpen+UnsavedClosed
         itemsno=len(saved)+len(available)+2
