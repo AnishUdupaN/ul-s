@@ -34,7 +34,7 @@ class KeywordQueryEventListener(EventListener):
         print('On Event\n\n')
         saved = wifilists.listavailable()
         print(saved.items())
-        for i in saved:
+        for i in saved.items():
             lockk = 'nolock' if saved[i][1] == "" else 'lock'
             items.append(ExtensionResultItem(
                     icon=f'./images/{lockk}/{saved[i][0]}bars.png',
