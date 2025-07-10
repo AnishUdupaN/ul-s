@@ -90,6 +90,7 @@ class ItemEnterEventListener(EventListener):
             return RenderResultListAction(items[:1])
         else:
             #unsaved network
+            print(f"data['SSID']:data['SECURITY']\n")
             if data['SECURITY']==False:
                 items.append(ExtensionResultItem(
                         icon='/home/anishudupan/projects/ul-s/images/clipbrown.png',
